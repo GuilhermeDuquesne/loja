@@ -1,0 +1,25 @@
+<h1>Produtos da categoria {{ categoria()?.nome }}</h1>
+
+@if (produtos().length === 0) {
+  <p class="info">Esta categoria ainda não tem produtos.</p>
+} @else {
+  <table>
+    <thead>
+      <tr><th>Código</th><th>Nome</th><th>Cor</th><th>Preço</th><th>Estoque</th><th>Ações</th></tr>
+    </thead>
+    <tbody>
+      @for (p of produtos(); track p.id) {
+        <tr>
+          <td>{{ p.id }}</td>
+          <td>{{ p.nome }}</td>
+          <td>{{ p.cor }}</td>
+          <td>{{ p.preco | currency:'BRL' }}</td>
+          <td>{{ p.estoque }}</td>
+          <td class="acoes"><a class="botao secundario" [routerLink]="['/produtos', p.id]">Detalhes</a></td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}
+
+<p><a class="botao secundario" routerLink="/categorias">Voltar</a></p>

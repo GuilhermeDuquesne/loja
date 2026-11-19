@@ -1,0 +1,45 @@
+<h1>Novo pedido</h1>
+
+<form (ngSubmit)="finalizar()" novalidate>
+  <label for="cliente">Cliente</label>
+  <input id="cliente" name="cliente" [(ngModel)]="cliente" />
+
+  <h2>Itens</h2>
+  <div class="linha">
+    <select name="produto" [(ngModel)]="produtoId">
+      <option [ngValue]="null">Selecione um produto...</option>
+      @for (p of produtos(); track p.id) {
+        <option [ngValue]="p.id">{{ p.nome }} ({{ p.cor }}) - {{ p.preco | currency:'BRL' }} - estoque {{ p.estoque }}</option>
+      }
+    </select>
+    <input name="quantidade" type="number" min="1" class="curto" [(ngModel)]="quantidade" />
+    <button type="button" class="secundario" (click)="adicionarItem()">Adicionar item</button>
+  </div>
+
+  @if (itens().length === 0) {
+    <p class="info">Nenhum item adicionado.</p>
+  } @else {
+    <table>
+      <thead>
+        <tr><th>Produto</th><th>Preço</th><th>Quantidade</th><th>Subtotal</th><th></th></tr>
+      </thead>
+      <tbody>
+        @for (i of itens(); track i.produtoId) {
+          <tr>
+            <td>{{ i.nome }}</td>
+            <td>{{ i.preco | currency:'BRL' }}</td>
+            <td>{{ i.quantidade }}</td>
+            <td>{{ i.preco * i.quantidade | currency:'BRL' }}</td>
+            <td class="acoes"><button type="button" class="perigo" (click)="removerItem(i.produtoId)">Remover</button></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    <p><strong>Total: {{ total() | currency:'BRL' }}</strong></p>
+  }
+
+  <div class="linha">
+    <button type="submit">Finalizar pedido</button>
+    <a class="botao secundario" routerLink="/pedidos">Cancelar</a>
+  </div>
+</form>

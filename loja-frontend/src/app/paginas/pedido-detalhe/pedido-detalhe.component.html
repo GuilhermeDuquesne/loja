@@ -1,0 +1,30 @@
+<h1>Detalhes do pedido</h1>
+
+@if (pedido(); as p) {
+  <section class="cartao">
+    <h2>Pedido {{ p.id }}</h2>
+    <dl>
+      <dt>Cliente</dt><dd>{{ p.cliente }}</dd>
+      <dt>Data</dt><dd>{{ p.data | date:'dd/MM/yyyy HH:mm' }}</dd>
+      <dt>Total</dt><dd>{{ p.total | currency:'BRL' }}</dd>
+    </dl>
+  </section>
+
+  <table>
+    <thead>
+      <tr><th>Produto</th><th>Preço</th><th>Quantidade</th><th>Subtotal</th></tr>
+    </thead>
+    <tbody>
+      @for (i of p.itens; track i.produtoId) {
+        <tr>
+          <td>{{ i.produtoNome }}</td>
+          <td>{{ i.precoUnitario | currency:'BRL' }}</td>
+          <td>{{ i.quantidade }}</td>
+          <td>{{ i.subtotal | currency:'BRL' }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}
+
+<p><a class="botao secundario" routerLink="/pedidos">Voltar</a></p>

@@ -1,0 +1,13 @@
+<h1>Loja</h1>
+<p>Bem-vindo, <strong>{{ auth.usuario() }}</strong>! Seu perfil é <strong>{{ auth.perfil() }}</strong>.</p>
+
+@if (!auth.ehAdmin()) {
+  <p class="info">Usuários comuns podem consultar categorias e produtos e criar pedidos. O cadastro e a edição são só do administrador.</p>
+}
+
+<ul>
+  <li><a routerLink="/categorias">Categorias</a></li>
+  <li><a routerLink="/produtos">Produtos</a></li>
+  <li><a routerLink="/produtos/busca">Buscar produtos por nome, cor e preço</a></li>
+  <li><a routerLink="/pedidos">Pedidos</a></li>
+</ul>

@@ -1,0 +1,16 @@
+<h1>Detalhes do produto</h1>
+
+@if (produto(); as p) {
+  <section class="cartao">
+    <h2>{{ p.nome }}</h2>
+    <dl>
+      <dt>Código</dt><dd>{{ p.id }}</dd>
+      <dt>Cor</dt><dd>{{ p.cor }}</dd>
+      <dt>Preço</dt><dd>{{ p.preco | currency:'BRL' }}</dd>
+      <dt>Estoque</dt><dd>{{ p.estoque }}</dd>
+      <dt>Categoria</dt><dd>{{ p.categoriaNome }}</dd>
+    </dl>
+  </section>
+}
+
+<p><a class="botao secundario" routerLink="/produtos">Voltar</a></p>

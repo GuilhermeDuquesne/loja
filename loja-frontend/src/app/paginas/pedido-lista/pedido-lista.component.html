@@ -1,0 +1,31 @@
+<h1>Pedidos</h1>
+
+<p><a class="botao" routerLink="/pedidos/novo">Novo pedido</a></p>
+
+@if (carregando()) {
+  <p class="info">Carregando...</p>
+} @else if (pedidos().length === 0) {
+  <p class="info">Nenhum pedido realizado.</p>
+} @else {
+  <table>
+    <thead>
+      <tr><th>Código</th><th>Cliente</th><th>Data</th><th>Total</th><th>Ações</th></tr>
+    </thead>
+    <tbody>
+      @for (p of pedidos(); track p.id) {
+        <tr>
+          <td>{{ p.id }}</td>
+          <td>{{ p.cliente }}</td>
+          <td>{{ p.data | date:'dd/MM/yyyy HH:mm' }}</td>
+          <td>{{ p.total | currency:'BRL' }}</td>
+          <td class="acoes">
+            <a class="botao secundario" [routerLink]="['/pedidos', p.id]">Detalhes</a>
+            @if (auth.ehAdmin()) {
+              <button type="button" class="perigo" (click)="excluir(p)">Excluir</button>
+            }
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}

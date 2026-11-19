@@ -1,0 +1,44 @@
+<h1>Buscar produtos</h1>
+
+<form (ngSubmit)="buscar()" novalidate>
+  <label for="nome">Nome</label>
+  <input id="nome" name="nome" placeholder="Ex.: caneta" [(ngModel)]="nome" />
+
+  <label for="cor">Cor</label>
+  <input id="cor" name="cor" placeholder="Ex.: azul" [(ngModel)]="cor" />
+
+  <label for="precoMax">Preço máximo</label>
+  <input id="precoMax" name="precoMax" type="number" step="0.01" min="0" placeholder="Ex.: 20" [(ngModel)]="precoMax" />
+
+  <div class="linha">
+    <button type="submit" [disabled]="carregando()">Buscar</button>
+    <button type="button" class="secundario" (click)="limpar()">Limpar</button>
+  </div>
+</form>
+
+@if (carregando()) {
+  <p class="info">Buscando...</p>
+} @else if (resultado() !== null) {
+  @let lista = resultado()!;
+  @if (lista.length === 0) {
+    <p class="info">Nenhum produto encontrado com esses filtros.</p>
+  } @else {
+    <table>
+      <thead>
+        <tr><th>Código</th><th>Nome</th><th>Cor</th><th>Preço</th><th>Categoria</th><th>Ações</th></tr>
+      </thead>
+      <tbody>
+        @for (p of lista; track p.id) {
+          <tr>
+            <td>{{ p.id }}</td>
+            <td>{{ p.nome }}</td>
+            <td>{{ p.cor }}</td>
+            <td>{{ p.preco | currency:'BRL' }}</td>
+            <td>{{ p.categoriaNome }}</td>
+            <td class="acoes"><a class="botao secundario" [routerLink]="['/produtos', p.id]">Detalhes</a></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+}

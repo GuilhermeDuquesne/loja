@@ -1,0 +1,11 @@
+<h1>{{ id === null ? 'Nova categoria' : 'Editar categoria' }}</h1>
+
+<form (ngSubmit)="salvar()" novalidate>
+  <label for="nome">Nome</label>
+  <input id="nome" name="nome" [(ngModel)]="nome" />
+
+  <div class="linha">
+    <button type="submit">Salvar</button>
+    <a class="botao secundario" routerLink="/categorias">Cancelar</a>
+  </div>
+</form>

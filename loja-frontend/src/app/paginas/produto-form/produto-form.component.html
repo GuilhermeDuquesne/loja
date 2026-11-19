@@ -1,0 +1,28 @@
+<h1>{{ id === null ? 'Novo produto' : 'Editar produto' }}</h1>
+
+<form (ngSubmit)="salvar()" novalidate>
+  <label for="nome">Nome</label>
+  <input id="nome" name="nome" [(ngModel)]="nome" />
+
+  <label for="cor">Cor</label>
+  <input id="cor" name="cor" [(ngModel)]="cor" />
+
+  <label for="preco">Preço</label>
+  <input id="preco" name="preco" type="number" step="0.01" min="0" [(ngModel)]="preco" />
+
+  <label for="estoque">Estoque</label>
+  <input id="estoque" name="estoque" type="number" min="0" [(ngModel)]="estoque" />
+
+  <label for="categoria">Categoria</label>
+  <select id="categoria" name="categoria" [(ngModel)]="categoriaId">
+    <option [ngValue]="null">Selecione...</option>
+    @for (c of categorias(); track c.id) {
+      <option [ngValue]="c.id">{{ c.nome }}</option>
+    }
+  </select>
+
+  <div class="linha">
+    <button type="submit">Salvar</button>
+    <a class="botao secundario" routerLink="/produtos">Cancelar</a>
+  </div>
+</form>

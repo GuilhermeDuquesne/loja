@@ -1,0 +1,16 @@
+<!-- Componente Menu: só aparece depois do login-->
+@if (auth.logado()) {
+  <app-menu/>
+}
+
+<main>
+  <!-- Mensagem de sucesso ou de erro-->
+  @if (mensagem.texto()) {
+    <p class="aviso" [class.erro]="mensagem.tipo() === 'erro'" (click)="mensagem.limpar()">
+      {{ mensagem.texto() }}
+    </p>
+  }
+
+  <!--Componente da página atual, administrado pelo router-->
+  <router-outlet/>
+</main>

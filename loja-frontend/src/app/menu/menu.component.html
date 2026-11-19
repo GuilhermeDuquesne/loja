@@ -1,0 +1,11 @@
+<!--Links de navegação-->
+<nav>
+    <a routerLink="/home" routerLinkActive="ativo">Início</a>
+    <a routerLink="/categorias" routerLinkActive="ativo">Categorias</a>
+    <a routerLink="/produtos" routerLinkActive="ativo" [routerLinkActiveOptions]="{exact: true}">Produtos</a>
+    <a routerLink="/produtos/busca" routerLinkActive="ativo">Buscar produtos</a>
+    <a routerLink="/pedidos" routerLinkActive="ativo">Pedidos</a>
+
+    <span class="usuario">{{ auth.usuario() }} ({{ auth.perfil() }})</span>
+    <button type="button" class="secundario" (click)="sair()">Sair</button>
+</nav>
