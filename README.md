@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Loja: categorias, produtos e pedidos
 
 Trabalho de Backend (API REST com Spring Boot) e Front-end (Angular), tema **Loja**.
@@ -89,3 +90,7 @@ src/app/
 ```
 
 Nenhum componente chama o `HttpClient`: todos usam os services.
+=======
+# loja
+Uma aplicação front-end que consuma a API REST criada no trabalho de backend, com o tema loja.
+>>>>>>> 747d51f24875307d6373ed96ecbd3664244ccd53
